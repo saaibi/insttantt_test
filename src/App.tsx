@@ -1,12 +1,12 @@
 import React from 'react';
-import Headers from './Components/Header';
-import Footer from './Components/Footer';
+import { Counter } from './features/counter/Counter';
 
 function App() {
   return (
     <div className="App">
-      <Headers/>
-      <header className="header"> </header>
+      <header className="App-header">
+        <Counter />
+      </header>
     </div>
   );
 }
