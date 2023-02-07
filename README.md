@@ -2,11 +2,11 @@
 
 ### `nvm use 18.14.0`
 
-Para usar la version 18.14.0 de node 
+Para usar la versión 18.14.0 de node 
 
 ### `npm install`
 
-Para instalar dependecias 
+Para instalar dependencias 
 ### `npm start`
 
 Para desplegar ambiente de desarrollo 
