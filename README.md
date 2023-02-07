@@ -2,7 +2,7 @@
 
 ### `nvm use 18.14.0`
 
-Para usar la dependencias 18.14.0 de node 
+Para usar la versión 18.14.0 de node 
 
 ### `npm install`
 
