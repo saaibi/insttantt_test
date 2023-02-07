@@ -40,9 +40,9 @@ $danger: $red !default;
 $light: $gray-100 !default;
 $dark: $gray-800 !default;
 $gray: $gray-300 !default;
-$default: $insttantt-4 !default;
-$light-gray: $insttantt-3 !default;
-$dark-gray: $insttantt-5 !default;
+$default: $insttantt-5 !default;
+$light-gray: $insttantt-4 !default;
+$dark-gray: $insttantt-3 !default;
 
 $theme-colors: (
   "primary": $primary,
@@ -58,7 +58,7 @@ $theme-colors: (
   "light-gray": $light-gray,
   "dark-gray": $dark-gray,
 );
-
+$modal-content-bg:                  $white !default;
 
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/variables-dark";
@@ -76,5 +76,6 @@ $theme-colors: (
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/modal";
 
 @import "bootstrap/scss/utilities/api";

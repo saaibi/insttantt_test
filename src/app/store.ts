@@ -1,11 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { createBrowserHistory } from 'history';
+import userReducer from '../features/users/userSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    user: userReducer,
   },
 });
+
+export const history = createBrowserHistory()
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

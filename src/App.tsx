@@ -1,14 +1,27 @@
-import React from 'react';
-import { Counter } from './features/counter/Counter';
+import React, { Fragment } from 'react';
+import SignUp from './features/users/SignUp';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
+import Header from './Components/Header'
+import Dashboard from './Components/Dashboard';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Counter />
-      </header>
-    </div>
+    <Fragment>
+      <Header />
+        <Routes>
+          <Route path="signup" element={<SignUp />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+    </Fragment>
   );
 }
 
-export default App;
+function Home() {
+  return (
+    <div>
+      <h2>Home</h2>
+    </div>
+  );
+}
