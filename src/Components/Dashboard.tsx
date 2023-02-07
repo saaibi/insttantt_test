@@ -2,6 +2,7 @@ import React from 'react'
 import { useAppSelector } from '../app/hooks';
 import UserEdit from '../features/users/UserEdit';
 import { selectUser } from '../features/users/userSlice';
+import Hobbies from './Hobbies';
 
 export default function Dashboard() {
     const user = useAppSelector(selectUser);
@@ -28,6 +29,7 @@ export default function Dashboard() {
                     <UserEdit id={user.user._id} />
                 </div>
             </div>
+            <Hobbies />
         </div>
     )
 }
