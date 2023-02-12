@@ -14,7 +14,7 @@ export default function UserEdit({ id }: UserEdits) {
         setUser((state: any) => ({ ...state, [field]: data, id }))
     }
     return (
-        <div>
+        <>
             <div className="mb-3">
                 <label htmlFor="country" className="form-label">Country</label>
                 <input id='country' onChange={(e) => userOnChange('country', e.target.value)} type="text" className="form-control" />
@@ -25,9 +25,9 @@ export default function UserEdit({ id }: UserEdits) {
             </div>
             <div className="mb-3">
                 <label htmlFor="address" className="form-label">Address</label>
-                <input id='address' onChange={(e) => userOnChange('address', e.target.value)} type="text" className="form-control" />
+                <input id='address' onChange={(e) => userOnChange('address', e.target.value)} type="text" maxLength={100} className="form-control" />
             </div>
             <button onClick={() => dispatch(editUser({ user, id })).unwrap()} className="btn btn-secondary me-3" type="button">Save</button>
-        </div>
+        </>
     )
 }

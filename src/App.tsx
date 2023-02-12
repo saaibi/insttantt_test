@@ -9,19 +9,17 @@ export default function App() {
   return (
     <Fragment>
       <Header />
-        <Routes>
-          <Route path="signup" element={<SignUp />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
+      <Routes>
+        <Route path="signup" element={<SignUp />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
     </Fragment>
   );
 }
 
 function Home() {
   return (
-    <div>
-      <h2>Home</h2>
-    </div>
+    <h2>Home</h2>
   );
 }
