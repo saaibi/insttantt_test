@@ -89,7 +89,11 @@ export const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-
+        logout: (state) => {
+            sessionStorage.clear()
+            state.loggingIn = false;
+            state.user = initialState.user
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -127,6 +131,8 @@ export const userSlice = createSlice({
             });
     },
 });
+
+export const { logout } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 

@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAppSelector } from '../app/hooks';
-import { selectUser } from '../features/users/userSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { logout, selectUser } from '../features/users/userSlice';
 import Modal from './Modal'
 
 export default function Header() {
+    const [signup, setSignup] = useState(false)
     const user = useAppSelector(selectUser);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { loggingIn } = useAppSelector(selectUser);
 
     useEffect(() => {
-        if (loggingIn) {
+        if (user.loggingIn) {
+            setSignup(false)
             navigate('/dashboard', { replace: true })
         }
-    }, [loggingIn, navigate])
-
+        if (!user.loggingIn && !signup) {
+            navigate('/', { replace: true })
+        }
+    }, [user.loggingIn, signup, navigate])
 
     return (
         <nav className="navbar bg-primary" data-bs-theme="dark">
@@ -23,13 +27,14 @@ export default function Header() {
                     <h3>Hubbec</h3>
                 </Link>
             </div>
-            {!user.loggingIn && <form className=" d-flex align-items-end flex-grow-1 flex-row-reverse" role="search">
+            {!user.loggingIn && <div className="d-flex align-items-end flex-grow-1 flex-row-reverse" role="search">
                 <Link to="/signup">
-                    <button className="btn btn-secondary me-3" type="button">Sign Up</button>
+                    <button onClick={() => setSignup(true)} className="btn btn-secondary me-3" type="button">Sign Up</button>
                 </Link>
                 <button className="btn btn-secondary me-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign In</button>
                 <Modal />
-            </form>}
+            </div>}
+            {user.loggingIn && <button onClick={() => dispatch(logout())} className="btn btn-secondary me-3" type="button">Logout</button>}
         </nav>
     )
 }

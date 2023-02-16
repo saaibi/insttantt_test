@@ -54,7 +54,7 @@ export default function SignUp() {
           <input id='expeditionDate' onChange={(e) => userOnChange('expeditionDate', e.target.value)} type="date" max={today} className="form-control" />
         </div>
       </div>
-      <button onClick={() => dispatch(createUser(user))} className="btn btn-secondary me-3" type="submit">Sign Up</button>
+      <button onClick={() => dispatch(createUser(user))} className="btn btn-secondary me-3" type="button">Sign Up</button>
       <div className="toast" id='toast_id' role="alert" aria-live="assertive" aria-atomic="true">
         <div className="toast-header">
           <strong className="me-auto">Bootstrap</strong>
