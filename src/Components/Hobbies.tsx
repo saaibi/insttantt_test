@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../app/hooks';
-import { selectUser } from '../features/users/userSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { selectUser, sessiontime } from '../features/users/userSlice';
 import socket from '../socket';
 
 export default function Hobbies() {
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectUser);
   const [hobbie, setHobbie] = useState<string>('');
   const [items, setItems] = useState<Array<any>>([]);
@@ -48,6 +49,7 @@ export default function Hobbies() {
           <button
             onClick={() => {
               setHobbie('');
+              dispatch(sessiontime());
               socket.emit("add hobbie", {
                 content: hobbie,
                 _id: user._id,

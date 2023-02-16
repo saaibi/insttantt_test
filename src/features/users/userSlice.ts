@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../../app/store';
+import { setTime, validateTime } from '../../app/utils';
 
 declare global {
     interface Window {
@@ -77,14 +78,6 @@ export const addHobbie = createAsyncThunk('api/users/hobbies', async ({ hobbie, 
     return await makeRequest(`http://localhost:4000/api/users/${id}/hobbies`, 'PUT', hobbie)
 });
 
-
-const setTime = (time: any) => {
-    const now: number = new Date().getTime();
-    sessionStorage.setItem('timeExpiration', now + time);
-}
-
-// const getTime = sessionStorage.getItem('timeExpiration')
-
 export const userSlice = createSlice({
     name: 'users',
     initialState,
@@ -93,6 +86,10 @@ export const userSlice = createSlice({
             sessionStorage.clear()
             state.loggingIn = false;
             state.user = initialState.user
+        },
+        sessiontime: (state) => {
+            if (!validateTime(initialState.time))
+                userSlice.caseReducers.logout(state)
         }
     },
     extraReducers: (builder) => {
@@ -120,10 +117,20 @@ export const userSlice = createSlice({
                 myModalEl[0]?.classList.remove("modal-backdrop");
                 mybodyEl.removeAttribute('style');
             })
+            .addCase(editUser.pending, (state, action) => {
+                state.status = 'loading';
+                userSlice.caseReducers.sessiontime(state)
+            })
             .addCase(editUser.fulfilled, (state, action) => {
                 state.status = 'idle';
                 state.user = action.payload.user;
-                setTime(state.time);
+            })
+            .addCase(editUser.rejected, (state, action) => {
+                state.status = 'failed';
+            })
+            .addCase(addHobbie.pending, (state, action) => {
+                state.status = 'loading';
+                userSlice.caseReducers.sessiontime(state)
             })
             .addCase(addHobbie.fulfilled, (state, action) => {
                 state.status = 'idle';
@@ -132,7 +139,7 @@ export const userSlice = createSlice({
     },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, sessiontime } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 
